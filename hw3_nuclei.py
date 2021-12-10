@@ -86,7 +86,7 @@ class NucleiConfig(Config):
     NAME = "nuclei"
 
     # Adjust depending on your GPU memory
-    IMAGES_PER_GPU = 3
+    IMAGES_PER_GPU = 1
 
     # Number of classes (including background)
     NUM_CLASSES = 1 + 1  # Background + nuclei
@@ -101,7 +101,7 @@ class NucleiConfig(Config):
 
     # Backbone network architecture
     # Supported values are: resnet50, resnet101
-    BACKBONE = "resnet50"
+    BACKBONE = "resnet101"
 
     # Input image resizing
     # Random crops of size 512x512
@@ -114,8 +114,8 @@ class NucleiConfig(Config):
     RPN_ANCHOR_SCALES = (4, 8, 16, 32, 64)
 
     # ROIs kept after non-maximum supression (training and inference)
-    POST_NMS_ROIS_TRAINING = 500
-    POST_NMS_ROIS_INFERENCE = 1000
+    POST_NMS_ROIS_TRAINING = 1000
+    POST_NMS_ROIS_INFERENCE = 2000
 
     # Non-max suppression threshold to filter RPN proposals.
     # You can increase this during training to generate more propsals.
@@ -253,8 +253,8 @@ def train(model, dataset_dir, subset):
         iaa.OneOf([iaa.Affine(rotate=90),
                    iaa.Affine(rotate=180),
                    iaa.Affine(rotate=270)]),
-#         iaa.Multiply((0.8, 1.5)),
-#         iaa.GaussianBlur(sigma=(0.0, 5.0))
+        iaa.Multiply((0.8, 1.5)),
+        iaa.GaussianBlur(sigma=(0.0, 5.0))
     ])
 
     # *** This training schedule is an example. Update to your needs ***
