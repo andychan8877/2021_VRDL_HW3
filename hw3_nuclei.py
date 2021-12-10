@@ -92,7 +92,7 @@ class NucleiConfig(Config):
     NUM_CLASSES = 1 + 1  # Background + nuclei
 
     # Number of training and validation steps per epoch
-    STEPS_PER_EPOCH = (128 - len(VAL_IMAGE_IDS)) // IMAGES_PER_GPU
+    STEPS_PER_EPOCH = (24 - len(VAL_IMAGE_IDS)) // IMAGES_PER_GPU
     VALIDATION_STEPS = max(1, len(VAL_IMAGE_IDS) // IMAGES_PER_GPU)
 
     # Don't exclude based on confidence. Since we have two classes
@@ -253,8 +253,8 @@ def train(model, dataset_dir, subset):
         iaa.OneOf([iaa.Affine(rotate=90),
                    iaa.Affine(rotate=180),
                    iaa.Affine(rotate=270)]),
-        iaa.Multiply((0.8, 1.5)),
-        iaa.GaussianBlur(sigma=(0.0, 5.0))
+#         iaa.Multiply((0.8, 1.5)),
+#         iaa.GaussianBlur(sigma=(0.0, 5.0))
     ])
 
     # *** This training schedule is an example. Update to your needs ***
@@ -264,14 +264,14 @@ def train(model, dataset_dir, subset):
     print("Train network heads")
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE,
-                epochs=10,
+                epochs=5,
                 augmentation=augmentation,
                 layers='heads')
 
     print("Train all layers")
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE,
-                epochs=20,
+                epochs=10,
                 augmentation=augmentation,
                 layers='all')
 
