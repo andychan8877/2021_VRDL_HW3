@@ -92,7 +92,7 @@ class NucleiConfig(Config):
     NUM_CLASSES = 1 + 1  # Background + nuclei
 
     # Number of training and validation steps per epoch
-    STEPS_PER_EPOCH = (60 - len(VAL_IMAGE_IDS)) // IMAGES_PER_GPU
+    STEPS_PER_EPOCH = (512 - len(VAL_IMAGE_IDS)) // IMAGES_PER_GPU
     VALIDATION_STEPS = max(1, len(VAL_IMAGE_IDS) // IMAGES_PER_GPU)
 
     # Don't exclude based on confidence. Since we have two classes
