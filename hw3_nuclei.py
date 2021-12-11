@@ -101,13 +101,13 @@ class NucleiConfig(Config):
 
     # Backbone network architecture
     # Supported values are: resnet50, resnet101
-    BACKBONE = "resnet101"
+    BACKBONE = "resnet50"
 
     # Input image resizing
     # Random crops of size 512x512
     IMAGE_RESIZE_MODE = "crop"
-    IMAGE_MIN_DIM = 512
-    IMAGE_MAX_DIM = 512
+    IMAGE_MIN_DIM = 128
+    IMAGE_MAX_DIM = 128
     IMAGE_MIN_SCALE = 2.0
 
     # Length of square anchor side in pixels
