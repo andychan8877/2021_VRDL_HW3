@@ -69,9 +69,9 @@ RESULTS_DIR = os.path.join(ROOT_DIR, "results/2021_VRDL_HW3/")
 # The dataset doesn't have a standard train/val split, so I picked
 # a variety of images to surve as a validation set.
 VAL_IMAGE_IDS = [
-    "TCGA-KB-A93J-01A-01-TS1",
-    "TCGA-NH-A8F7-01A-01-TS1",
-    "TCGA-RD-A8N9-01A-01-TS1",
+#     "TCGA-KB-A93J-01A-01-TS1",
+#     "TCGA-NH-A8F7-01A-01-TS1",
+#     "TCGA-RD-A8N9-01A-01-TS1",
 ]
 
 
@@ -106,8 +106,8 @@ class NucleiConfig(Config):
     # Input image resizing
     # Random crops of size 512x512
     IMAGE_RESIZE_MODE = "crop"
-    IMAGE_MIN_DIM = 128
-    IMAGE_MAX_DIM = 128
+    IMAGE_MIN_DIM = 256
+    IMAGE_MAX_DIM = 256
     IMAGE_MIN_SCALE = 2.0
 
     # Length of square anchor side in pixels
