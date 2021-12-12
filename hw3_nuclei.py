@@ -70,8 +70,8 @@ RESULTS_DIR = os.path.join(ROOT_DIR, "results/2021_VRDL_HW3/")
 # a variety of images to surve as a validation set.
 VAL_IMAGE_IDS = [
 #     "TCGA-KB-A93J-01A-01-TS1",
-#     "TCGA-NH-A8F7-01A-01-TS1",
-#     "TCGA-RD-A8N9-01A-01-TS1",
+    "TCGA-NH-A8F7-01A-01-TS1",
+    "TCGA-RD-A8N9-01A-01-TS1",
 ]
 
 
@@ -105,13 +105,13 @@ class NucleiConfig(Config):
 
     # Input image resizing
     # Random crops of size 512x512
-    IMAGE_RESIZE_MODE = "crop"
+    IMAGE_RESIZE_MODE = "square"
     IMAGE_MIN_DIM = 256
     IMAGE_MAX_DIM = 256
     IMAGE_MIN_SCALE = 2.0
 
     # Length of square anchor side in pixels
-    RPN_ANCHOR_SCALES = (8, 16, 32, 64, 128)
+    RPN_ANCHOR_SCALES = (4, 8, 16, 32, 64)
 
     # ROIs kept after non-maximum supression (training and inference)
     POST_NMS_ROIS_TRAINING = 1000
