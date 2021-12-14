@@ -413,6 +413,7 @@ def detect(model, dataset_dir, subset):
                 print(type(figure))
                 print(figure)
                 result.append(figure)
+                break;
        
         # Save image with masks
         visualize.display_instances(
