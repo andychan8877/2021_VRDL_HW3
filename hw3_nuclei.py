@@ -434,7 +434,7 @@ def detect(model, dataset_dir, subset):
 #         f.write(submissions)
     fileName = "answer.json"
     with open(fileName, "w") as f:
-       f.write(str(result)
+       f.write(str(result))
        f.close()
     print("Saved to ", submit_dir)
     print(str(result))
