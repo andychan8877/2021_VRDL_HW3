@@ -195,7 +195,7 @@ class NucleiDataset(utils.Dataset):
             elif subset == "test":
                 a = []
                 temp = os.listdir(dataset_dir)
-                image_ids = [temp[6],temp[3],temp[0],temp[4],temp[2],temp[1]]
+                image_ids = [temp[6][:-4],temp[3][:-4],temp[0][:-4],temp[4][:-4],temp[2][:-4],temp[1][:-4]]
             if subset == "train":
                 image_ids = list(set(image_ids) - set(VAL_IMAGE_IDS))
 
