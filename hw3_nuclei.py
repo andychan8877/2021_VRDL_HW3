@@ -391,6 +391,9 @@ def detect(model, dataset_dir, subset):
         r = model.detect([image], verbose=0)[0]
         rle = mask.encode(np.asfortranarray(r['masks']))
         submission.append(rle)
+        print(submission)
+        print(submission[0])
+        print(submission[1])
         for i in range(len(rle)):
 #             item = { 'filename' : pictDat[i]["name"] }
 #             figures = []
