@@ -384,17 +384,17 @@ def detect(model, dataset_dir, subset):
         # Load image and run detection
         image = dataset.load_image(image_id)
         if dataset.image_info[image_id]["id"] == 'TCGA-A7-A13E-01Z-00-DX1':
-              id = 1
+              img_id = 1
         elif dataset.image_info[image_id]["id"] == 'TCGA-50-5931-01Z-00-DX1':
-              id = 2
+              img_id = 2
         elif dataset.image_info[image_id]["id"] == 'TCGA-G2-A2EK-01A-02-TSB':
-              id = 3
+              img_id = 3
         elif dataset.image_info[image_id]["id"] == 'TCGA-AY-A8YK-01A-01-TS1':
-              id = 4
+              img_id = 4
         elif dataset.image_info[image_id]["id"] == 'TCGA-G9-6336-01Z-00-DX1':
-              id = 5
+              img_id = 5
         elif dataset.image_info[image_id]["id"] == 'TCGA-G9-6348-01Z-00-DX1':
-              id = 6
+              img_id = 6
         
         # Detect objects
         r = model.detect([image], verbose=0)[0]
@@ -402,19 +402,13 @@ def detect(model, dataset_dir, subset):
         submission.append(rle)
 #         print(submission)
 #         print(submission[0])
+#         figures = []
         for i in range(len(submission[0])):
 #             item = { 'filename' : pictDat[i]["name"] }
-#             figures = []
 #             for j in range(len(pictDat[i]['height'])):
-                
-                figure = {}
-                figure["image_id"] = id
                 figure_bbox = []
                 figure_bbox = [r['rois'][i][1], r['rois'][i][0], r['rois'][i][3]-r['rois'][i][1] , r['rois'][i][2]-r['rois'][i][0]]
-                figure["bbox"]  = figure_bbox
-                figure["score"]  = r['scores'][i]
-                figure["category_id"]  = r['class_ids'][i]
-                figure["segmentation"]  = submission[0][i]
+                figure = dict(image_id=img_id, bbox=figure_bbox, score=r['scores'][i], category_id=r['class_ids'][i], segmentation=submission[0][i])
 #                 print(submission[0][i])
                 result.append(figure)
        
@@ -425,21 +419,21 @@ def detect(model, dataset_dir, subset):
             show_bbox=False, show_mask=True,
             title="Predictions")
         plt.savefig("{}/{}.png".format(submit_dir, dataset.image_info[image_id]["id"]))
-
+    print(result)
     # Save to csv file
 #     submissions = str(dataset.image_info[image_id]["id"]) + ' ' + str(r['rois'][0]) + ' ' + str(r['scores'][0]) + ' ' + str(r['class_ids'][0]) + " ".join('%s' %a for a in submission[0]) + "\n"
 #     print(submissions)
 #     file_path = os.path.join(submit_dir, "submit.csv")
 #     with open(file_path, "w") as f:
 #         f.write(submissions)
-    fileName = "answer.json"
-    result = str(result)
-    result = result.replace("'",'"')
-    with open(fileName, "w") as f:
-       f.write(result)
-       f.close()
-    print("Saved to ", submit_dir)
-    print(str(result))
+#     fileName = "answer.json"
+#     result = str(result)
+#     result = result.replace("'",'"')
+#     with open(fileName, "w") as f:
+#        f.write(result)
+#        f.close()
+#     print("Saved to ", submit_dir)
+#     print(str(result))
 
 
 ############################################################
