@@ -42,6 +42,7 @@ import datetime
 import numpy as np
 import skimage.io
 from imgaug import augmenters as iaa
+from pycocotools import mask
 
 # Root directory of the project
 # 移到Mask RCNN的主路徑
