@@ -400,7 +400,9 @@ def detect(model, dataset_dir, subset):
                 
                 figure = {}
                 figure['image_id'] = source_id
-                figure['bbox']  = r['rois'][i]
+                figure_bbox = []
+                figure_bbox = [r['rois'][i][1], r['rois'][i][0], r['rois'][i][3]-r['rois'][i][1] , r['rois'][i][4]-r['rois'][i][2]]
+                figure['bbox']  = figure_bbox
                 figure['score']  = r['scores'][i]
                 figure['category_id']  = r['class_ids'][i]
                 figure['segmentation']  = submission[0][i]
