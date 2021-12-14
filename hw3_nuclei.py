@@ -196,7 +196,7 @@ class NucleiDataset(utils.Dataset):
                 temp = os.listdir(dataset_dir)
                 for image_id in temp:
                      if image_id[-4:]=='.png':
-                          a.append(image_id)
+                          a.append(image_id[-4:])
                 image_ids = a
             if subset == "train":
                 image_ids = list(set(image_ids) - set(VAL_IMAGE_IDS))
@@ -213,7 +213,7 @@ class NucleiDataset(utils.Dataset):
               self.add_image(
                      "nuclei",
                             image_id=image_id,
-                                   path=os.path.join(dataset_dir, image_id))
+                                   path=os.path.join(dataset_dir, "{}.png".format(image_id)))
 
     def load_mask(self, image_id):
         """Generate instance masks for an image.
