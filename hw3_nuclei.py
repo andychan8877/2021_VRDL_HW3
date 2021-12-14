@@ -424,7 +424,7 @@ def detect(model, dataset_dir, subset):
         plt.savefig("{}/{}.png".format(submit_dir, dataset.image_info[image_id]["id"]))
     fileName = "answer.json"
     result = json.dumps(result)
-#     print(type(result))
+    print(result)
     file = open(fileName, "w")
     json.dump(result, file)
     file.close()
