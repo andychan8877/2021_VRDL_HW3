@@ -414,7 +414,7 @@ def detect(model, dataset_dir, subset):
                 print(type(figure))
                 print(figure)
                 result.append(figure)
-                break;
+                
                 
         break;
         # Save image with masks
