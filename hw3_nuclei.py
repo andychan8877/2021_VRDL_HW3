@@ -213,7 +213,7 @@ class NucleiDataset(utils.Dataset):
               self.add_image(
                      "nuclei",
                             image_id=image_id,
-                                   path=os.path.join(dataset_dir, "images/{}.png".format(image_id)))
+                                   path=os.path.join(dataset_dir, image_id))
 
     def load_mask(self, image_id):
         """Generate instance masks for an image.
