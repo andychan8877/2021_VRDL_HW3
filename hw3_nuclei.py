@@ -415,11 +415,11 @@ def detect(model, dataset_dir, subset):
         plt.savefig("{}/{}.png".format(submit_dir, dataset.image_info[image_id]["id"]))
 
     # Save to csv file
-    submissions = str(dataset.image_info[image_id]["id"]) + ' ' + str(r['rois'][0]) + ' ' + str(r['scores'][0]) + ' ' + str(r['class_ids'][0]) + " ".join('%s' %a for a in submission[0]) + "\n"
-    print(submissions)
-    file_path = os.path.join(submit_dir, "submit.csv")
-    with open(file_path, "w") as f:
-        f.write(submissions)
+#     submissions = str(dataset.image_info[image_id]["id"]) + ' ' + str(r['rois'][0]) + ' ' + str(r['scores'][0]) + ' ' + str(r['class_ids'][0]) + " ".join('%s' %a for a in submission[0]) + "\n"
+#     print(submissions)
+#     file_path = os.path.join(submit_dir, "submit.csv")
+#     with open(file_path, "w") as f:
+#         f.write(submissions)
     print("Saved to ", submit_dir)
     print(result)
 
