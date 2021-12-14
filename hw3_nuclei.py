@@ -422,7 +422,7 @@ def detect(model, dataset_dir, subset):
             show_bbox=False, show_mask=True,
             title="Predictions")
         plt.savefig("{}/{}.png".format(submit_dir, dataset.image_info[image_id]["id"]))
-    break;
+        break;
     fileName = "answer.json"
     result = json.dumps(result)
     print(result)
