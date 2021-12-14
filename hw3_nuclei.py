@@ -374,7 +374,7 @@ def detect(model, dataset_dir, subset):
     dataset.load_nuclei(dataset_dir, subset)
     dataset.prepare()
     # Load over images
-    submission = []
+    
     submissions = []
     result = []
         # Encode image to RLE. Returns a string of multiple lines
@@ -383,6 +383,7 @@ def detect(model, dataset_dir, subset):
 # numpy.asfortranarray(binmask)
     
     for image_id in dataset.image_ids:
+        submission = []
         # Load image and run detection
         image = dataset.load_image(image_id)
         source_id = dataset.image_info[image_id]["id"]
@@ -394,6 +395,7 @@ def detect(model, dataset_dir, subset):
 #             item = { 'filename' : pictDat[i]["name"] }
 #             figures = []
 #             for j in range(len(pictDat[i]['height'])):
+                
                 figure = {}
                 figure['image_id'] = source_id
                 figure['bbox']  = r['rois'][i]
