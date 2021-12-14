@@ -410,6 +410,8 @@ def detect(model, dataset_dir, subset):
                 figure_bbox = [r['rois'][i][1], r['rois'][i][0], r['rois'][i][3]-r['rois'][i][1] , r['rois'][i][2]-r['rois'][i][0]]
                 figure = dict(image_id=img_id, bbox=figure_bbox, score=r['scores'][i], category_id=r['class_ids'][i], segmentation=submission[0][i])
 #                 print(submission[0][i])
+                print(type(figure))
+                print(figure)
                 result.append(figure)
        
         # Save image with masks
