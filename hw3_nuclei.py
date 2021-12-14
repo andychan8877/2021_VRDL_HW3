@@ -432,10 +432,10 @@ def detect(model, dataset_dir, subset):
 #     file_path = os.path.join(submit_dir, "submit.csv")
 #     with open(file_path, "w") as f:
 #         f.write(submissions)
-#     fileName = "answer.json"
-#     with open(fileName, "w") as f:
-#        json.dump(result, f)
-#        f.close()
+    fileName = "answer.json"
+    with open(fileName, "w") as f:
+       f.write(str(result)
+       f.close()
     print("Saved to ", submit_dir)
     print(str(result))
 
