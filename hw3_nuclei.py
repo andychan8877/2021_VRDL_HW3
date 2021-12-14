@@ -405,7 +405,7 @@ def detect(model, dataset_dir, subset):
                 figure['category_id']  = r['class_ids'][i]
                 figure['segmentation']  = ('%s' %a for a in submission[0][i])
                 print(submission[0][i])
-        result.append(item)
+        result.append(figure)
        
         # Save image with masks
         visualize.display_instances(
