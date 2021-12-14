@@ -411,8 +411,8 @@ def detect(model, dataset_dir, subset):
                 submission[0][i]['counts'] = submission[0][i]['counts'].decode("utf-8") 
                 figure = dict(image_id=img_id, bbox=figure_bbox, score=float(r['scores'][i]), category_id=int(r['class_ids'][i]), segmentation=submission[0][i])                     
 #                 print(submission[0][i])           
-                print(type(figure))
-                print(figure)
+#                 print(type(figure))
+#                 print(figure)
                 result.append(figure)
      
         # Save image with masks
@@ -424,7 +424,7 @@ def detect(model, dataset_dir, subset):
         plt.savefig("{}/{}.png".format(submit_dir, dataset.image_info[image_id]["id"]))
     fileName = "answer.json"
     result = json.dumps(result)
-    print(type(result))
+#     print(type(result))
     file = open(fileName, "w")
     json.dump(result, file)
     file.close()
