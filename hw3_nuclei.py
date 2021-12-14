@@ -385,7 +385,7 @@ def detect(model, dataset_dir, subset):
         source_id = dataset.image_info[image_id]["id"]
 #         rle = mask_to_rle(source_id, r["masks"], r["scores"])
 # numpy.asfortranarray(binmask)
-        rle = mask.encode(np.asfortranarray(r['masks']))
+        rle = mask.encode(np.asfortranarray(r))
         submission.append(rle)
         # Save image with masks
         visualize.display_instances(
