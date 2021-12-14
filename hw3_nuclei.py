@@ -396,7 +396,7 @@ def detect(model, dataset_dir, subset):
         plt.savefig("{}/{}.png".format(submit_dir, dataset.image_info[image_id]["id"]))
 
     # Save to csv file
-    submission = "ImageId,EncodedPixels\n" + "\n".join(submission)
+    submission = "ImageId,EncodedPixels\n" + "\n".join('%s' %a for a in submission)
     file_path = os.path.join(submit_dir, "submit.csv")
     with open(file_path, "w") as f:
         f.write(submission)
