@@ -186,6 +186,8 @@ class NucleiDataset(utils.Dataset):
         if subset == "val":
             image_ids = VAL_IMAGE_IDS
         else:
+            print('subset_dir: '+subset_dir)
+            print('dataset_dir: '+dataset_dir)  
             # Get image ids from directory names
             if subset == "train":
                 image_ids = next(os.walk(dataset_dir))[1]
