@@ -408,7 +408,7 @@ def detect(model, dataset_dir, subset):
 #             for j in range(len(pictDat[i]['height'])):
                 figure_bbox = []
                 figure_bbox = [r['rois'][i][1], r['rois'][i][0], r['rois'][i][3]-r['rois'][i][1] , r['rois'][i][2]-r['rois'][i][0]]
-                figure = dict(image_id=img_id, bbox=figure_bbox, score=r['scores'][i], category_id=r['class_ids'][i], segmentation=submission[0][i])
+                figure = dict(image_id=img_id.tolist(), bbox=figure_bbox.tolist(), score=r['scores'][i].tolist(), category_id=r['class_ids'][i].tolist(), segmentation=submission[0][i].tolist())
 #                 print(submission[0][i])
                 print(type(figure))
                 print(figure)
