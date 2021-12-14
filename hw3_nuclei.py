@@ -63,7 +63,7 @@ COCO_WEIGHTS_PATH = os.path.join(ROOT_DIR, "mask_rcnn_coco.h5")
 # through the command line argument --logs
 DEFAULT_LOGS_DIR = os.path.join(ROOT_DIR, "logs")
 
-# Results directory
+# s directory
 # Save submission files here
 RESULTS_DIR = os.path.join(ROOT_DIR, "results/2021_VRDL_HW3/")
 
@@ -375,19 +375,33 @@ def detect(model, dataset_dir, subset):
     dataset.prepare()
     # Load over images
     submission = []
+    submissions = []
+    result = []
+        # Encode image to RLE. Returns a string of multiple lines
+        
+#         rle = mask_to_rle(source_id, r["masks"], r["scores"])
+# numpy.asfortranarray(binmask)
+    
     for image_id in dataset.image_ids:
         # Load image and run detection
         image = dataset.load_image(image_id)
+        source_id = dataset.image_info[image_id]["id"]
         # Detect objects
         r = model.detect([image], verbose=0)[0]
-#         print(r['masks'])
-        # Encode image to RLE. Returns a string of multiple lines
-        source_id = dataset.image_info[image_id]["id"]
-#         rle = mask_to_rle(source_id, r["masks"], r["scores"])
-# numpy.asfortranarray(binmask)
         rle = mask.encode(np.asfortranarray(r['masks']))
-        print(rle)
         submission.append(rle)
+        for i in range(len(rle)):
+#             item = { 'filename' : pictDat[i]["name"] }
+#             figures = []
+#             for j in range(len(pictDat[i]['height'])):
+                figure = {}
+                figure['image_id'] = source_id
+                figure['bbox']  = r['rois'][i]
+                figure['score']  = r['scores'][i]
+                figure['category_id']  = r['class_ids'][i]
+                figure['segmentation']  = '%s' %a for a in submission[i]
+        result.append(item)
+       
         # Save image with masks
         visualize.display_instances(
             image, r['rois'], r['masks'], r['class_ids'],
@@ -397,12 +411,13 @@ def detect(model, dataset_dir, subset):
         plt.savefig("{}/{}.png".format(submit_dir, dataset.image_info[image_id]["id"]))
 
     # Save to csv file
-    submission = str(dataset.image_info[image_id]["id"]) + ' ' + str(r['rois'][0]) + ' ' + str(r['scores'][0]) + ' ' + str(r['class_ids'][0]) + " ".join('%s' %a for a in submission[0]) + "\n"
-    print(submission)
+    submissions = str(dataset.image_info[image_id]["id"]) + ' ' + str(r['rois'][0]) + ' ' + str(r['scores'][0]) + ' ' + str(r['class_ids'][0]) + " ".join('%s' %a for a in submission[0]) + "\n"
+    print(submissions)
     file_path = os.path.join(submit_dir, "submit.csv")
     with open(file_path, "w") as f:
-        f.write(submission)
+        f.write(submissions)
     print("Saved to ", submit_dir)
+    print(result)
 
 
 ############################################################
