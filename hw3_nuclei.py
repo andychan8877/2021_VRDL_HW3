@@ -426,9 +426,9 @@ def detect(model, dataset_dir, subset):
     fileName = "answer.json"
     result = json.dumps(result)
     print(result)
-    file = open(fileName, "w")
-    json.dump(result, file)
-    file.close()
+    with open(fileName, "w") as f:
+       f.write(result)
+       f.close()
     # Save to csv file
 #     submissions = str(dataset.image_info[image_id]["id"]) + ' ' + str(r['rois'][0]) + ' ' + str(r['scores'][0]) + ' ' + str(r['class_ids'][0]) + " ".join('%s' %a for a in submission[0]) + "\n"
 #     print(submissions)
