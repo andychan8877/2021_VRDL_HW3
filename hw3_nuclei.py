@@ -393,7 +393,7 @@ def detect(model, dataset_dir, subset):
         submission.append(rle)
 #         print(submission)
 #         print(submission[0])
-        for i in range(len(submission[0][i])):
+        for i in range(len(submission[0])):
 #             item = { 'filename' : pictDat[i]["name"] }
 #             figures = []
 #             for j in range(len(pictDat[i]['height'])):
