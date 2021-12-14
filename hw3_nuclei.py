@@ -383,7 +383,19 @@ def detect(model, dataset_dir, subset):
         submission = []
         # Load image and run detection
         image = dataset.load_image(image_id)
-        source_id = dataset.image_info[image_id]["id"]
+        if dataset.image_info[image_id]["id"] == 'TCGA-A7-A13E-01Z-00-DX1':
+              id = 1
+        elif dataset.image_info[image_id]["id"] == 'TCGA-50-5931-01Z-00-DX1':
+              id = 2
+        elif dataset.image_info[image_id]["id"] == 'TCGA-G2-A2EK-01A-02-TSB':
+              id = 3
+        elif dataset.image_info[image_id]["id"] == 'TCGA-AY-A8YK-01A-01-TS1':
+              id = 4
+        elif dataset.image_info[image_id]["id"] == 'TCGA-G9-6336-01Z-00-DX1':
+              id = 5
+        elif dataset.image_info[image_id]["id"] == 'TCGA-G9-6348-01Z-00-DX1':
+              id = 6
+        
         # Detect objects
         r = model.detect([image], verbose=0)[0]
         rle = mask.encode(np.asfortranarray(r['masks']))
@@ -396,7 +408,7 @@ def detect(model, dataset_dir, subset):
 #             for j in range(len(pictDat[i]['height'])):
                 
                 figure = {}
-                figure['image_id'] = source_id
+                figure['image_id'] = id
                 figure_bbox = []
                 figure_bbox = [r['rois'][i][1], r['rois'][i][0], r['rois'][i][3]-r['rois'][i][1] , r['rois'][i][2]-r['rois'][i][0]]
                 figure['bbox']  = figure_bbox
