@@ -398,7 +398,7 @@ def detect(model, dataset_dir, subset):
         
         # Detect objects
         r = model.detect([image], verbose=0)[0]
-        rle = mask.encode(np.asfortranarray(r['masks']))
+        rle = mask.encode(np.uint8(r['masks']))
         submission.append(rle)
 #         print(submission)
 #         print(submission[0])
