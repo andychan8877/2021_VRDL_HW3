@@ -193,9 +193,12 @@ class NucleiDataset(utils.Dataset):
             if subset == "train":
                 image_ids = next(os.walk(dataset_dir))[1]
             elif subset == "test":
-                a = []
+                b = []
                 temp = os.listdir(dataset_dir)
-                image_ids = [temp[6][:-4],temp[3][:-4],temp[0][:-4],temp[4][:-4],temp[2][:-4],temp[1][:-4]]
+                for a in temp:
+                      if a[-4:]=='.png':
+                            b.append(a[:-4])
+                image_ids = b
             if subset == "train":
                 image_ids = list(set(image_ids) - set(VAL_IMAGE_IDS))
 
