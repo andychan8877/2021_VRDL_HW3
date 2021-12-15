@@ -200,7 +200,7 @@ class NucleiDataset(utils.Dataset):
                 image_ids = list(set(image_ids) - set(VAL_IMAGE_IDS))
 
         # Add images
-        if subset == "train":
+        if subset == "train" or subset == "val":
             for image_id in image_ids:
               self.add_image(
                      "nuclei",
@@ -355,93 +355,93 @@ def mask_to_rle(image_id, mask, scores):
 #  Detection
 ############################################################
 
-# def detect(model, dataset_dir, subset):
-#     """Run detection on images in the given directory."""
-#     print("Running on {}".format(dataset_dir))
+def detect(model, dataset_dir, subset):
+    """Run detection on images in the given directory."""
+    print("Running on {}".format(dataset_dir))
 
-#     # Create directory
-#     if not os.path.exists(RESULTS_DIR):
-#         os.makedirs(RESULTS_DIR)
-#     submit_dir = "submit_{:%Y%m%dT%H%M%S}".format(datetime.datetime.now())
-#     submit_dir = os.path.join(RESULTS_DIR, submit_dir)
-#     os.makedirs(submit_dir)
+    # Create directory
+    if not os.path.exists(RESULTS_DIR):
+        os.makedirs(RESULTS_DIR)
+    submit_dir = "submit_{:%Y%m%dT%H%M%S}".format(datetime.datetime.now())
+    submit_dir = os.path.join(RESULTS_DIR, submit_dir)
+    os.makedirs(submit_dir)
 
-#     # Read dataset
-#     dataset = NucleiDataset()
-#     dataset.load_nuclei(dataset_dir, subset)
-#     dataset.prepare()
-#     # Load over images
+    # Read dataset
+    dataset = NucleiDataset()
+    dataset.load_nuclei(dataset_dir, subset)
+    dataset.prepare()
+    # Load over images
     
-#     submissions = []
-#     result = []
-#         # Encode image to RLE. Returns a string of multiple lines
+    submissions = []
+    result = []
+        # Encode image to RLE. Returns a string of multiple lines
         
-# #         rle = mask_to_rle(source_id, r["masks"], r["scores"])
-# # numpy.asfortranarray(binmask)
+#         rle = mask_to_rle(source_id, r["masks"], r["scores"])
+# numpy.asfortranarray(binmask)
     
-#     for image_id in dataset.image_ids:
-#         submission = []
-#         # Load image and run detection
-#         image = dataset.load_image(image_id)
-#         if dataset.image_info[image_id]["id"] == 'TCGA-A7-A13E-01Z-00-DX1':
-#               img_id = 1
-#         elif dataset.image_info[image_id]["id"] == 'TCGA-50-5931-01Z-00-DX1':
-#               img_id = 2
-#         elif dataset.image_info[image_id]["id"] == 'TCGA-G2-A2EK-01A-02-TSB':
-#               img_id = 3
-#         elif dataset.image_info[image_id]["id"] == 'TCGA-AY-A8YK-01A-01-TS1':
-#               img_id = 4
-#         elif dataset.image_info[image_id]["id"] == 'TCGA-G9-6336-01Z-00-DX1':
-#               img_id = 5
-#         elif dataset.image_info[image_id]["id"] == 'TCGA-G9-6348-01Z-00-DX1':
-#               img_id = 6
+    for image_id in dataset.image_ids:
+        submission = []
+        # Load image and run detection
+        image = dataset.load_image(image_id)
+        if dataset.image_info[image_id]["id"] == 'TCGA-A7-A13E-01Z-00-DX1':
+              img_id = 1
+        elif dataset.image_info[image_id]["id"] == 'TCGA-50-5931-01Z-00-DX1':
+              img_id = 2
+        elif dataset.image_info[image_id]["id"] == 'TCGA-G2-A2EK-01A-02-TSB':
+              img_id = 3
+        elif dataset.image_info[image_id]["id"] == 'TCGA-AY-A8YK-01A-01-TS1':
+              img_id = 4
+        elif dataset.image_info[image_id]["id"] == 'TCGA-G9-6336-01Z-00-DX1':
+              img_id = 5
+        elif dataset.image_info[image_id]["id"] == 'TCGA-G9-6348-01Z-00-DX1':
+              img_id = 6
         
-#         # Detect objects
-#         r = model.detect([image], verbose=0)[0]
-#         rle = mask.encode(np.asfortranarray(r['masks']))
-#         submission.append(rle)
-# #         print(submission)
-# #         print(submission[0])
-# #         figures = []
-#         for i in range(len(submission[0])):
-# #             item = { 'filename' : pictDat[i]["name"] }
-# #             for j in range(len(pictDat[i]['height'])):
-#                 figure_bbox = []
-#                 figure_bbox = [float(r['rois'][i][1]), float(r['rois'][i][0]), float(r['rois'][i][3]-r['rois'][i][1]) , float(r['rois'][i][2]-r['rois'][i][0])]
-#                 submission[0][i]['counts'] = submission[0][i]['counts'].decode("utf-8") 
-#                 figure = dict(image_id=img_id, bbox=figure_bbox, score=float(r['scores'][i]), category_id=int(r['class_ids'][i]), segmentation=submission[0][i])                     
-# #                 print(submission[0][i])           
-# #                 print(type(figure))
-# #                 print(figure)
-#                 result.append(figure)
+        # Detect objects
+        r = model.detect([image], verbose=0)[0]
+        rle = mask.encode(np.asfortranarray(r['masks']))
+        submission.append(rle)
+#         print(submission)
+#         print(submission[0])
+#         figures = []
+        for i in range(len(submission[0])):
+#             item = { 'filename' : pictDat[i]["name"] }
+#             for j in range(len(pictDat[i]['height'])):
+                figure_bbox = []
+                figure_bbox = [float(r['rois'][i][1]), float(r['rois'][i][0]), float(r['rois'][i][3]-r['rois'][i][1]) , float(r['rois'][i][2]-r['rois'][i][0])]
+                submission[0][i]['counts'] = submission[0][i]['counts'].decode("utf-8") 
+                figure = dict(image_id=img_id, bbox=figure_bbox, score=float(r['scores'][i]), category_id=int(r['class_ids'][i]), segmentation=submission[0][i])                     
+#                 print(submission[0][i])           
+#                 print(type(figure))
+#                 print(figure)
+                result.append(figure)
      
-#         # Save image with masks
-#         visualize.display_instances(
-#             image, r['rois'], r['masks'], r['class_ids'],
-#             dataset.class_names, r['scores'],
-#             show_bbox=False, show_mask=True,
-#             title="Predictions")
-#         plt.savefig("{}/{}.png".format(submit_dir, dataset.image_info[image_id]["id"]))
+        # Save image with masks
+        visualize.display_instances(
+            image, r['rois'], r['masks'], r['class_ids'],
+            dataset.class_names, r['scores'],
+            show_bbox=False, show_mask=True,
+            title="Predictions")
+        plt.savefig("{}/{}.png".format(submit_dir, dataset.image_info[image_id]["id"]))
+    fileName = "answer.json"
+    result = json.dumps(result)
+    print(result)
+    with open(fileName, "w") as f:
+       f.write(result)
+       f.close()
+    # Save to csv file
+#     submissions = str(dataset.image_info[image_id]["id"]) + ' ' + str(r['rois'][0]) + ' ' + str(r['scores'][0]) + ' ' + str(r['class_ids'][0]) + " ".join('%s' %a for a in submission[0]) + "\n"
+#     print(submissions)
+#     file_path = os.path.join(submit_dir, "submit.csv")
+#     with open(file_path, "w") as f:
+#         f.write(submissions)
 #     fileName = "answer.json"
-#     result = json.dumps(result)
-#     print(result)
+#     result = str(result)
+#     result = result.replace("'",'"')
 #     with open(fileName, "w") as f:
 #        f.write(result)
 #        f.close()
-#     # Save to csv file
-# #     submissions = str(dataset.image_info[image_id]["id"]) + ' ' + str(r['rois'][0]) + ' ' + str(r['scores'][0]) + ' ' + str(r['class_ids'][0]) + " ".join('%s' %a for a in submission[0]) + "\n"
-# #     print(submissions)
-# #     file_path = os.path.join(submit_dir, "submit.csv")
-# #     with open(file_path, "w") as f:
-# #         f.write(submissions)
-# #     fileName = "answer.json"
-# #     result = str(result)
-# #     result = result.replace("'",'"')
-# #     with open(fileName, "w") as f:
-# #        f.write(result)
-# #        f.close()
-# #     print("Saved to ", submit_dir)
-# #     print(str(result))
+#     print("Saved to ", submit_dir)
+#     print(str(result))
 
 
 ############################################################
