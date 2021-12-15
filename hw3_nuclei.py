@@ -93,7 +93,7 @@ class NucleiConfig(Config):
     NUM_CLASSES = 1 + 1  # Background + nuclei
 
     # Number of training and validation steps per epoch
-    STEPS_PER_EPOCH = (30 - len(VAL_IMAGE_IDS)) // IMAGES_PER_GPU
+    STEPS_PER_EPOCH = (102 - len(VAL_IMAGE_IDS)) // IMAGES_PER_GPU
     VALIDATION_STEPS = max(1, len(VAL_IMAGE_IDS) // IMAGES_PER_GPU)
 
     # Don't exclude based on confidence. Since we have two classes
@@ -120,7 +120,7 @@ class NucleiConfig(Config):
 
     # Non-max suppression threshold to filter RPN proposals.
     # You can increase this during training to generate more propsals.
-    RPN_NMS_THRESHOLD = 0.9
+    RPN_NMS_THRESHOLD = 0.7
 
     # How many anchors per image to use for RPN training
     RPN_TRAIN_ANCHORS_PER_IMAGE = 80
@@ -155,7 +155,7 @@ class NucleiInferenceConfig(NucleiConfig):
     IMAGE_RESIZE_MODE = "pad64"
     # Non-max suppression threshold to filter RPN proposals.
     # You can increase this during training to generate more propsals.
-    RPN_NMS_THRESHOLD = 0.9
+    RPN_NMS_THRESHOLD = 0.7
 
 
 ############################################################
@@ -282,17 +282,16 @@ def train(model, dataset_dir, subset):
     print("Train network heads")
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE,
-                epochs=10,
+                epochs=20,
                 augmentation=augmentation,
                 layers='heads')
 
     print("Train all layers")
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE,
-                epochs=20,
+                epochs=40,
                 augmentation=augmentation,
                 layers='all')
-
 
 ############################################################
 #  RLE Encoding
