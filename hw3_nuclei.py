@@ -93,7 +93,7 @@ class NucleiConfig(Config):
     NUM_CLASSES = 1 + 1  # Background + nuclei
 
     # Number of training and validation steps per epoch
-    STEPS_PER_EPOCH = (102 - len(VAL_IMAGE_IDS)) // IMAGES_PER_GPU
+    STEPS_PER_EPOCH = (32 - len(VAL_IMAGE_IDS)) // IMAGES_PER_GPU
     VALIDATION_STEPS = max(1, len(VAL_IMAGE_IDS) // IMAGES_PER_GPU)
 
     # Don't exclude based on confidence. Since we have two classes
@@ -106,7 +106,7 @@ class NucleiConfig(Config):
 
     # Input image resizing
     # Random crops of size 512x512
-    IMAGE_RESIZE_MODE = "square"
+    IMAGE_RESIZE_MODE = "crop"
     IMAGE_MIN_DIM = 256
     IMAGE_MAX_DIM = 256
     IMAGE_MIN_SCALE = 2.0
@@ -282,14 +282,14 @@ def train(model, dataset_dir, subset):
     print("Train network heads")
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE,
-                epochs=20,
+                epochs=10,
                 augmentation=augmentation,
                 layers='heads')
 
     print("Train all layers")
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE,
-                epochs=40,
+                epochs=20,
                 augmentation=augmentation,
                 layers='all')
 
