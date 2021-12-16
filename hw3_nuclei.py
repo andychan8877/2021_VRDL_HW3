@@ -405,6 +405,8 @@ def detect(model, dataset_dir, subset):
 #         print(submission)
 #         print(submission[0])
 #         figures = []
+        print(r)
+#         print(r['rois'])
         for i in range(len(submission[0])):
 #             item = { 'filename' : pictDat[i]["name"] }
 #             for j in range(len(pictDat[i]['height'])):
