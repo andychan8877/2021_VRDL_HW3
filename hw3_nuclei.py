@@ -199,6 +199,14 @@ class NucleiDataset(utils.Dataset):
                       if a[-4:]=='.png':
                             b.append(a[:-4])
                 image_ids = b
+                image_ids = [
+                     "TCGA-A7-A13E-01Z-00-DX1",
+                     "TCGA-50-5931-01Z-00-DX1",
+                     "TCGA-G2-A2EK-01A-02-TSB",
+                     "TCGA-AY-A8YK-01A-01-TS1",
+                     "TCGA-G9-6336-01Z-00-DX1",
+                     "TCGA-G9-6348-01Z-00-DX1",
+                            ]
             if subset == "train":
                 image_ids = list(set(image_ids) - set(VAL_IMAGE_IDS))
 
