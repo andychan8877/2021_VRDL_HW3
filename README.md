@@ -61,5 +61,5 @@ or
 
 ```
 cd Mask_RCNN/samples/2021_VRDL_HW3
-python3 hw3_nuclei.py test --dataset=/path/to/dataset --subset=test --weights=/path/to/weight.h5
+python3 hw3_nuclei.py detect --dataset=/path/to/dataset --subset=test --weights=/path/to/weight.h5
 ```
