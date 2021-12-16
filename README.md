@@ -57,3 +57,9 @@ cd Mask_RCNN/samples/2021_VRDL_HW3
 python3 inference.py inference --dataset=/path/to/dataset --subset=test --weights=/path/to/weight.h5
 ```
 
+or
+
+```
+cd Mask_RCNN/samples/2021_VRDL_HW3
+python3 hw3_nuclei.py test --dataset=/path/to/dataset --subset=test --weights=/path/to/weight.h5
+```
